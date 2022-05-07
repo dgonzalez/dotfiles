@@ -1,37 +1,22 @@
-call plug#begin("~/.vim/plugged")
-Plug 'dracula/vim'
+call plug#begin()
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install()} }
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'preservim/nerdtree'
-Plug 'habamax/vim-asciidoctor'
-Plug 'kien/ctrlp.vim'
 call plug#end()
 
-"Config Section
-if (has("termguicolors"))
- set termguicolors
-endif
-syntax enable
-colorscheme dracula
-
 set number relativenumber
-augroup numbertoggle
-  autocmd!
-  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-augroup END
+color gruvbox
 
-" All the config for coc in its own repository:
-source ~/.config/nvim/coc-config.vim
+let mapleader="\<space>"
 
-" Set leader to space
-"nnoremap <SPACE> <Nop>
-let mapleader=" "
+" Trigger fzf
+nnoremap <leader>p  :Files<CR>
 
-" Mappings to access buffers (don't use "\p" because a
-" delay before pressing "p" would accidentally paste).
-" \l       : list buffers
-" \b \f \g : go back/forward/last-used
-" \1 \2 \3 : go to buffer 1/2/3 etc
+" Trigger search 
+nnoremap <leader>s  :Ag<CR>
+
+" Buffers mapping
 nnoremap <Leader>l :ls<CR>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>f :bn<CR>
@@ -46,12 +31,7 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
-" It's useful to show the buffer number in the status line.
-set laststatus=2 statusline=%02n:%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 
-" Ignore common for CtrlP
-let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
-nnoremap <C-p> :CtrlP<CR>
 
 " Dont get killed by team mates
 filetype plugin indent on
@@ -64,15 +44,3 @@ set softtabstop=2
 set shiftwidth=2
 
 :set colorcolumn=80
-
-"""" asciidoctor
-
-" What to use for HTML, default `asciidoctor`.
-let g:asciidoctor_executable = 'asciidoctor'
-
-" What extensions to use for HTML, default `[]`.
-let g:asciidoctor_extensions = ['asciidoctor-diagram', 'asciidoctor-rouge']
-
-" Path to the custom css
-let g:asciidoctor_css_path = '~/docs/AsciiDocThemes'
-
