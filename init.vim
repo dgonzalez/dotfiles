@@ -32,6 +32,7 @@ nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
 nnoremap <Leader>y :CocList -I symbols<CR>
+nnoremap <Leader>g  :exe 'CocList -I --normal --input='.expand('<cword>').' symbols'<CR>
 
 " closing matching braces
 inoremap { {}<left>
