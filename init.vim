@@ -4,6 +4,9 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install()} }
 Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'prettier/vim-prettier'
+Plug 'hashivim/vim-terraform'
+Plug 'tpope/vim-fugitive'
+Plug 'preservim/nerdtree'
 call plug#end()
 set number relativenumber
 color gruvbox
@@ -31,12 +34,20 @@ nnoremap <Leader>7 :7b<CR>
 nnoremap <Leader>8 :8b<CR>
 nnoremap <Leader>9 :9b<CR>
 nnoremap <Leader>0 :10b<CR>
-nnoremap <Leader>y :CocList -I symbols<CR>
+nnoremap <Leader>o :CocList -I symbols<CR>
 nnoremap <Leader>g  :exe 'CocList -I --normal --input='.expand('<cword>').' symbols'<CR>
-
+"
 " Closing braces
 inoremap { {}<left>
 inoremap [ []<left>
+
+" Copy like a normal person
+nnoremap <C-y> "*y
+nnoremap <C-p> "*p
+
+" Buffers rodeo
+noremap <C-k> :bnext<CR>
+noremap <C-j> :bprev<CR>
 
 " Dont get killed by team mates
 filetype plugin indent on
@@ -76,3 +87,15 @@ function! ShowDocumentation()
     call feedkeys('K', 'in')
   endif
 endfunction
+
+
+" Allow copy paste in neovim
+let g:neovide_input_use_logo = 1
+map <D-v> "+p<CR>
+map! <D-v> <C-R>+
+tmap <D-v> <C-R>+
+vmap <D-c> "+y<CR>
+
+if exists("g:neovide")
+  let g:neovide_scale_factor = 1.3
+endif
